@@ -1,0 +1,13 @@
+Brian Notes 1/1/2018
+Going through this now and coming up with a plan to add a bunch of data.
+I have added the following folders for structure:
+- Datamart (Where the logic for the Datamart Stucture goes)
+- ETL (Where the ETL Logic goes)
+- Nodes (Where the logic for creating the blockchain data nodes exist)
+This should be enough to get us started.
+I am going to start with Bitcoin and use a publically available API to start
+building our ETL. After I get that settled, I will go and create a Datamart.
+
+Future Question: We will be getting a fuck ton of different datetime stamps
+and will need to convert them to some standard format across the board. What
+timestamp will be best for this?
