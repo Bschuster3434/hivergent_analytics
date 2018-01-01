@@ -11,3 +11,12 @@ building our ETL. After I get that settled, I will go and create a Datamart.
 Future Question: We will be getting a fuck ton of different datetime stamps
 and will need to convert them to some standard format across the board. What
 timestamp will be best for this?
+
+Working through 100 blocks for Ethereum. We can do up to 300 requests a minute,
+which means that we can clear a day in a reasonable time frame.
+Just need a good way to be able to add new transactions and keep track of
+everything as it eventually fails. Working on the BTC ETL now.
+
+Well... shit. Seems that BTC can allow for multiple senders in a particular
+transaction. Also, i'm starting to get sloppy. Just wasted an hour running the
+Ethereum ETL for it to be wasted. Boo.
