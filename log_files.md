@@ -21,3 +21,21 @@ everything as it eventually fails. Working on the BTC ETL now.
 Well... shit. Seems that BTC can allow for multiple senders in a particular
 transaction. Also, i'm starting to get sloppy. Just wasted an hour running the
 Ethereum ETL for it to be wasted. Boo.
+
+#Brian Notes 1/5/2018
+
+Worked my through the Bitcoin Ledger and found some good information. Now
+working on Ripple and grabbing their transations. They will be a bit more
+challenging, as there is quite a variety of transactions that happen on their
+ledger, not a ton of which is actually XRP based. So we may need to add a field
+to help facilitate their date (currency).
+
+This is going to take some give and take. Ripple has a lot of transaction types,
+and there's a lot of offers.
+
+#Brian Notes 1/6/2018
+
+Talked with the devs at IOTA and while there isn't a publically avaialble API
+for IOTA, there is a pure python implementation that we could run to pull data.
+This can act as a starting point for us here, if we chose to go down this
+road.
