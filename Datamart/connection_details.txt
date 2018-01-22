@@ -1,0 +1,5 @@
+host: hivergent-analytics.cowj5hl9e0rt.us-east-1.redshift.amazonaws.com
+port: 5439
+user: admin
+password: Hivergent1
+db: dev
