@@ -39,3 +39,24 @@ Talked with the devs at IOTA and while there isn't a publically avaialble API
 for IOTA, there is a pure python implementation that we could run to pull data.
 This can act as a starting point for us here, if we chose to go down this
 road.
+
+#Brian Notes 1/23/2018
+Oh bother. So, I'm starting to create the fact and Dimension tables and realized
+a problem. If I have everything completely done with ids and what not, I will
+need to have a more robust ETL process than what I currently have. I am
+pulling data out of the blockchain apis and then dumping them. To have the
+ids, I either need to have the ids built into the ETL from the get-go, or have
+another step somewhere to sort all that shit out. Hmm... tricky.
+
+I could just go ahead and build the 'flat' version of this dataset with
+everything stored in one big table just to get something out... but I kind of
+want to know what this in production might look like. I'll have to think
+this through...
+
+Alright, so we're going to waste a lot of time trying to create the dim model
+I have in 'datamart_design'. There's just a lot of little work that's just
+not worth the effort at this stage of the game. So instead, we're going to
+take each python script and have it run the double duty of extracting data and
+transforming it. That way, if we eventually want to split it into two parts,
+we have the ability to do so. So the model is going to be simplified quite
+a bit (one table perhaps).
