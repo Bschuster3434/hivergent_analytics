@@ -1,0 +1,74 @@
+V2 Design Doc
+Design of the Datamart table
+
+Fact Tables
+- Transactions
+
+Dimension Tables
+- Datetime
+- Currency
+- USD Exchange Rate
+- Blockchain Network
+- Transaction Type
+- Transaction Subtype
+- Transaction Ops
+
+FactTransactions Table Attributes
+- id
+- transaction_hash
+- sender_address
+- transaction_type_id
+- transaction_subtype_id
+- transaction_code_id
+- fee
+- blockchain_network_id
+- sent_currency_id
+- sent_currency_amount
+- exchange_received_currency_id
+- exchange_received_amount
+- exchange_rate
+
+DimDatetime
+- id
+- date_normalized
+- unix_timestamp
+- year
+- quarter
+- month
+- week
+- day
+- hour
+- minute
+- second
+
+DimCurrency
+- id
+- currency_code
+- currency_name
+- cryptocurrency_flag
+- native_asset_flag
+
+DimExchangeRate
+- id
+- datetime_id
+- currency_id
+- USD_to_currency_amount
+
+DimBlockchainNetwork
+- id
+- blockchain_name
+
+DimTransactionType
+- id
+- transaction_type_name
+
+DimTransactionSubType
+- id
+- transaction_subtype_name
+- transaction_type_name
+
+DimTransactionOps
+- id
+- ops_name
+- transaction_type_id
+- transaction_subtype_id
