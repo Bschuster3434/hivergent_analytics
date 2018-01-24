@@ -137,4 +137,5 @@ def test():
 
     print "All Tests Passed"
 
-main()
+#main()
+test()
