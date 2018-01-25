@@ -1,0 +1,7 @@
+Type (And Subtypes)
+- payment
+-- coinbase
+-- simple_send
+- exchange
+-- simple_exchange
+- admin
