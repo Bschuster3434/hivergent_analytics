@@ -60,3 +60,9 @@ take each python script and have it run the double duty of extracting data and
 transforming it. That way, if we eventually want to split it into two parts,
 we have the ability to do so. So the model is going to be simplified quite
 a bit (one table perhaps).
+
+#Brian Notes 1/25/2018
+More trickiness... there are certain protocols that run on top of the Bitcoin
+blockchain (specifically Tether) that would have to be decoded above and
+beyond what is currently already here. Definitely a Phase II change, but
+something worth considering.
