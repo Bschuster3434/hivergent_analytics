@@ -115,7 +115,16 @@ def store_transaction_data(block_transactions, json_file_name):
 
     print "Saving file: " + csv_file_name
     df = pd.DataFrame.from_dict(block_transactions)
-    df.to_csv(csv_file_path, index=False)
+
+    #column ordering goes here
+    columns =  ['id', 'datetime', 'unixtimestamp', 'transaction_hash']
+    columns += ['sender_address', 'transaction_type_name']
+    columns += ['transaction_subtype_name', 'fee', 'blockchain_network_name']
+    columns += ['sent_currency_name', 'sent_currency_amount', 'status']
+
+    df = df[columns]
+
+    df.to_csv(csv_file_path, index=False, header=False)
 
 def main():
     #Go to the directory with all the Json files and return list of locations
