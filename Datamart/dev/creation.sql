@@ -13,5 +13,6 @@ CREATE TABLE factTransactions
   sent_currency_amount decimal(20,10),
   exchange_received_currency_name VARCHAR(40),
   exchange_received_amount decimal(20,10),
-  exchange_rate VARCHAR(40)
+  exchange_rate VARCHAR(40),
+  status_name int
 );

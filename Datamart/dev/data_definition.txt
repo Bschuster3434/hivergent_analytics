@@ -5,3 +5,7 @@ Type (And Subtypes)
 - exchange
 -- simple_exchange
 - admin
+
+Status
+- 1 (Succeed)
+- 0 (Fail)
