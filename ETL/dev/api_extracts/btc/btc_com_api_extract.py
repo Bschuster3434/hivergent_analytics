@@ -4,6 +4,7 @@ import json
 import requests
 from requests.compat import urljoin
 import sys
+import math
 
 #URL Endpoints
 #https://chain.api.btc.com/v3/block/3
@@ -52,13 +53,31 @@ def find_next_block_range(next_block, ending_block, block_size):
 def grab_block_transactions(block_num):
     '''
     Grabs the next set of transactions for the next block.
+    Iterates through every page of the api response.
     Returns as a dictionary.
     '''
     print "Calling API for block: " + str(block_num)
-    next_url_call = urljoin(url_endpoint, "v3/block/" + str(block_num) + "/tx")
-    resp = json.loads(requests.get(next_url_call).content)
+    print "Grabbing api page: 1"
 
-    return resp
+    next_url_call = urljoin(url_endpoint, "v3/block/" + str(block_num) + "/tx")
+    first_resp = json.loads(requests.get(next_url_call).content)
+
+    total_iterations = int(math.ceil(first_resp['data']['total_count']/float(50)))
+
+    time.sleep(1)
+
+    for i in range(2,total_iterations + 1):
+        print "Now on page: " + str(i)
+        next_url_call = urljoin(url_endpoint, "v3/block/" + str(block_num) + "/tx")
+        next_url_call = urljoin(next_url_call, "?page=" + str(i))
+        next_resp = json.loads(requests.get(next_url_call).content)
+
+        first_resp['data']['list'] +=  next_resp['data']['list']
+
+        time.sleep(1)
+
+    first_resp['data']['pagesize'] = first_resp['data']['total_count']
+    return first_resp
 
 def grab_transactions_from_api(starting_block, ending_block, block_size, bc_file):
     '''
@@ -93,7 +112,7 @@ def grab_transactions_from_api(starting_block, ending_block, block_size, bc_file
 
         #Save the json data as a .json file
         str_end_block = next_end_block - 1
-        transaction_files_name = "btcjson/btc_" + str(next_start_block) + "_" \
+        transaction_files_name = r"json/btc_" + str(next_start_block) + "_" \
                                     + str(str_end_block) + ".json"
 
         print "Writting to file: " + transaction_files_name
@@ -114,7 +133,7 @@ def main():
     #Starting Point for analysis
     starting_block = 501798 #Dec 31st 2017 start
     ending_block = 501960 #Dec 31st 2017 end
-    block_size = 20
+    block_size = 5
     block_check_file = "latest_btc_extract_block.txt"
 
     grab_transactions_from_api(starting_block, ending_block, \
@@ -127,8 +146,8 @@ def test():
     assert find_latest_block('blockcheck_test.txt', \
                         test_1_starting_block, test_1_ending_block) == test_1_starting_block
 
-    test_start_block = 100000
-    test_end_block = 100005
+    test_start_block = 200000
+    test_end_block = 200005
     test_block_size = 2
     test_block_check_file = "test_btc_extract_block.txt"
 
@@ -137,5 +156,5 @@ def test():
 
     print "All Tests Passed"
 
-#main()
-test()
+main()
+#test()
