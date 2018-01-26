@@ -152,6 +152,5 @@ def main():
         #Store the file with the same name with CSV in the folder
 
         store_transaction_data(block_transactions, json_file_name)
-        break
 
 main()
