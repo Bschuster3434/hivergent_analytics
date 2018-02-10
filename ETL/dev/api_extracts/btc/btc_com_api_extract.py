@@ -119,6 +119,7 @@ def grab_transactions_from_api(starting_block, ending_block, block_size, bc_file
         with open(transaction_files_name, 'w') as fp:
             json.dump(block_dict, fp)
 
+        #Write to bc_file what block we left off on
         next_block_string = str(next_end_block)
         print "Writting next block string: " + next_block_string
         with open(bc_file, 'w') as f:
