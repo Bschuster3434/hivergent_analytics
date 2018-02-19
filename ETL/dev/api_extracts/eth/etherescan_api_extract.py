@@ -162,8 +162,8 @@ def grab_transactions_from_api(starting_block, ending_block, block_per_file, bc_
 #testing_json_output
 def main():
     print "Starting Processing"
-    starting_block = 4826779
-    ending_block = 4832685
+    starting_block = 4832685
+    ending_block = 4832686
     block_per_file = 60
     bc_file = "latest_block.txt"
 
