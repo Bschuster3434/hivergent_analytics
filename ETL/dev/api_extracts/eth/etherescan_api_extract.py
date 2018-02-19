@@ -107,7 +107,7 @@ def grab_transactions_from_api(starting_block, ending_block, block_per_file, bc_
     ending block (exclusive).Will chunk json files based on theh number in
     'block_per_file' and record the last block returned in bc_file.
 
-    Writes directly to csv (no return function)
+    Writes directly to json (no return function)
     '''
 
     #Go through the first (or next) starting block and

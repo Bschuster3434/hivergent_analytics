@@ -1,2 +1,3 @@
 ETL/dev/api_extracts/btc/json/*
 ETL/dev/api_extracts/eth/json/*
+ETL/dev/api_extracts/xrp/json/*
