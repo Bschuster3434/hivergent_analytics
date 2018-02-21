@@ -36,11 +36,11 @@ def find_next_block_range(next_block, ending_block, block_per_file):
     cont_flag will be 1 if loop should start, 0 if not.
     '''
     cont_flag = 0
-    final_full_range_end = next_block + block_per_file
-    if next_block < ending_block and final_full_range_end < ending_block:
+    full_range_end_block = next_block + block_per_file
+    if next_block < ending_block and full_range_end_block < ending_block:
         cont_flag = 1
-        block_range = (next_block, final_full_range_end)
-    elif next_block < ending_block and final_full_range_end >= ending_block:
+        block_range = (next_block, full_range_end_block)
+    elif next_block < ending_block and full_range_end_block >= ending_block:
         cont_flag = 1
         block_range = (next_block, ending_block)
     else:
