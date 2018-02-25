@@ -131,7 +131,7 @@ def main():
     iso_start_datetime = start_datetime.isoformat()
     end_datetime = datetime.datetime(2018,1,1,0,0)
     iso_end_datetime = end_datetime.isoformat()
-    minutes_per_file = 10
+    minutes_per_file = 5
     ts_file = "latest_timestamp.txt"
 
     grab_transactions_from_api(start_datetime, end_datetime, minutes_per_file, ts_file)
@@ -147,4 +147,4 @@ def test():
 
     grab_transactions_from_api(start_datetime, end_datetime, minutes_per_file, ts_file)
 
-test()
+main()
