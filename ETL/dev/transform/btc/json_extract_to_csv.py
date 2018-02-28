@@ -144,6 +144,7 @@ def main():
         #For each block, process all the transactions and return as a list
         block_keys = json_data.keys()
 
+        #Processing block by block
         for next_key in block_keys:
             print "Processing Block: " + next_key
             block_data = json_data[next_key]
