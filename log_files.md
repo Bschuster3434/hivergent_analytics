@@ -66,3 +66,20 @@ More trickiness... there are certain protocols that run on top of the Bitcoin
 blockchain (specifically Tether) that would have to be decoded above and
 beyond what is currently already here. Definitely a Phase II change, but
 something worth considering.
+
+#Brian Notes 2/28/2018
+Been working on pulling the data for both Ethereum and Ripple.
+Ripple data is not pulled by 'ledger' (their version of a block), but I pulled
+the data back via timeframe. Here's the catch: I don't know if the Timestamp
+api is inclusive or exclusive. The json files are so big it's hard to pull
+them out and search (is there a tool to help with this?). I'll upload the data
+as is, then check for duplicates after the fact. If there are duplicates, I can
+re-run the table and make the hash a primary key to upsert duplicate records.
+In the future, we'll avoid this issue by just searching by ledger as oppossed to
+timestamp. Why the fuck does each blockchain feel the need to create their own
+god damn definition of the same thing. "Oh, we don't have blockchain, it's a
+different protocol". You have fucking ledgers that are basically the same
+fucking concept as a block. Get off your high horse and stop confusing the
+normies, asshole.
+
+Okay, so csv files are stored without header info.
