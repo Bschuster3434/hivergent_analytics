@@ -1,3 +1,6 @@
 ETL/dev/api_extracts/btc/json/*
 ETL/dev/api_extracts/eth/json/*
 ETL/dev/api_extracts/xrp/json/*
+ETL/dev/transform/xrp/csv/*
+ETL/dev/transform/btc/csv/*
+ETL/dev/transform/eth/csv/*
