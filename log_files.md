@@ -83,3 +83,20 @@ fucking concept as a block. Get off your high horse and stop confusing the
 normies, asshole.
 
 Okay, so csv files are stored without header info.
+
+#Brian Notes 3/4/2018
+So, janky bullshit found it's way into the development. As I suspected, I was
+bringing in duplicate data due to the way that the ETL was pulling in data
+from Ripple via dates. Seems that when you list a date, it's inclusive on
+both ends, which means that I had overlapping times. So I had to run
+a distinct select on the dataset to pull it into the table. I plan on fixing
+this in prod by pulling by ledger as opposed to datetime.
+
+So, pulled in the dataset and see some changes I want to make. First off,
+Offer Cancels seem to modify previous records in the dataset, so it seems
+that there needs to be a modification made to the numbers pulled to make
+sure we don't count records that shouldn't be counted. That data is in the
+json, but not sure where.
+
+In addition, OfferCancel might actually be an administrative task, not an exchange
+activity. Regardless, good stuff happening here.
