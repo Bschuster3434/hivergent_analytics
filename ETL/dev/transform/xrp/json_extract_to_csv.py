@@ -203,7 +203,6 @@ def store_transaction_data(transactions, json_file_name):
     df = pd.DataFrame.from_dict(transactions)
 
     #column ordering goes here
-    #TODO: Add the correct ordering based on Ripple
     columns =  ['id', 'datetime', 'unixtimestamp', 'transaction_hash']
     columns += ['sender_address', 'transaction_type_name']
     columns += ['transaction_subtype_name', 'fee', 'blockchain_network_name']
@@ -214,8 +213,6 @@ def store_transaction_data(transactions, json_file_name):
     df = df[columns]
 
     df.to_csv(csv_file_path, index=False, header=False)
-
-    pass
 
 def main():
     #Go and read the files in the json directory
