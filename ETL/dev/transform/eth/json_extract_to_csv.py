@@ -16,6 +16,10 @@ def process_ethereum_json(json_data):
     Returns the data as a list of dictionaries, each
     dictionary as a new transaction on the blockchain.
     '''
+    #Read Ethereum transactions
+    processed_transactions = []
+    raw_transactions = json_data['result']['transactions']
+
     pass
 
 def store_transaction_data(transactions, json_file_name):
