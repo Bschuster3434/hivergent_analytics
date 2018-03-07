@@ -100,3 +100,14 @@ json, but not sure where.
 
 In addition, OfferCancel might actually be an administrative task, not an exchange
 activity. Regardless, good stuff happening here.
+
+#Brian Notes 3/7/2018
+Okay, bit of a snag today. I realize now that decoding the data from Ethereum
+is going to be a bit more challenging than I anticipated. Worse, it seems like
+some of the libraries used to decode the data points I need are actually
+not purely hex, but reading ABI data which is Ethereum's own way of handling
+variables and input data. Not super complicated, but there's a lot of moving
+parts. I really need to sit down and think through the architecture on this one.
+I just need the damn thing done, not solve the architecture for the whole
+project. I may hire a researcher to go find some data for me on some of these
+bigger contracts. Regardless, I need some time.
