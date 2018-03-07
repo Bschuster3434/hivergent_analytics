@@ -111,3 +111,37 @@ parts. I really need to sit down and think through the architecture on this one.
 I just need the damn thing done, not solve the architecture for the whole
 project. I may hire a researcher to go find some data for me on some of these
 bigger contracts. Regardless, I need some time.
+
+---
+
+No man is ever happy about shoveling shit, but only someone who's prepared to
+shovel shit is willing to talk about it. So, let's talk.
+
+In the project design, it appears that we're not going to be able to handle
+smart contracts and non-smart contracts at the same time. Before, we just
+dumped all the contracts into the same CSV files because they were coming from
+the same set of contracts. However, because of the way smart contracts need to
+be read, we need a python3 library to complete the job. We can't do everything
+in python2, like I orignally hoped. However, we don't have to make too dramatic
+of a change to accomodate this... at least for the POC. We can split the
+transform activities into two separate scripts: smart contract and non-smart
+contract. Non-smart contracts will act as the base, handling all the contracts
+similar to the very very early POC. Nothing changes. We can then load those
+CSVs into the datamart and start analyzing quite soon (possibly by Friday).
+
+The smart contracts, on the other hand, will require reading multiple data
+sources and feeds, some of which I'm not sure how to do yet. But what's clear
+is that we need a new programming language to handle this, whether it's
+python3 or node.js is yet to be decided. In this case, we need to do the
+heavy work of parsing out which contracts belong to which currencies, reading
+the input data to figure out which functions are being called, etc. Messy
+bullshit, but something we can swallow for the prototype. Because of Taylor,
+it's likely we'll have much, much better details going into the next phase, so
+I'm not going to stress getting a perfect solution right now. Just enough to
+get us there.
+
+So, no point making life more miserable than it needs to be. I'll start with
+re-architecting the folder structure and getting the non-smart contract
+component completed. Once that's done, off to the next section.
+
+Gally-fucking-ho!
