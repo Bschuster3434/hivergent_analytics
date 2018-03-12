@@ -145,3 +145,13 @@ re-architecting the folder structure and getting the non-smart contract
 component completed. Once that's done, off to the next section.
 
 Gally-fucking-ho!
+
+#Brian Notes 3/12/18
+
+Well, fuck me sideways, something else we learned today. Smart contracts
+created do not have a 'to' field and have to be handled separately. I don't
+see anything in the transaction log that seems to indicate a contract, other
+than have a 'contractAddress' in the receipt. I assume this is the indicator,
+but I'll have to look at a few more examples to be certain. For now, I'm just
+going to assume these need to be handled at some point and continue with
+just smart contracts.
