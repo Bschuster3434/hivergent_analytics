@@ -58,17 +58,34 @@ def process_ethereum_json(json_data):
             i_block = i['block']
             i_receipt = i['receipt']
 
+            #Universal Variables Regardless of tx
+            next_tx = {'datetime': timestamp, 'unixtimestamp': unix_timestamp}
+            next_tx['blockchain_network_name'] = network_name
+
+            next_tx['id'] = network_name + "_" + i_block['hash']
+            next_tx['transaction_hash'] = i_block['hash']
+            next_tx['sender_address'] = i_block['from']
+
+            #An input assumes a smart contract
             if next_input != u'0x':
-                continue
+
+                #A 'to' address of None type is a smart contract created
+                if i_block['to'] == None:
+
+                    next_tx['transaction_type_name'] = 'admin'
+                    next_tx['transaction_subtype_name'] = 'smart_contract_creation'
+
+                    next_tx['status'] = int(i_receipt['status'],0)
+
+                    #Calculating fee
+                    gas_price = int(i_block['gasPrice'],0)
+                    gas_used = int(i_receipt['gasUsed'],0)
+                    next_tx['fee'] = tx_cost_in_ETH(gas_used, gas_price)
+
+                else:
+                    continue
             #rest of the transaction processing otherwise
             else:
-                next_tx = {'datetime': timestamp, 'unixtimestamp': unix_timestamp}
-                next_tx['blockchain_network_name'] = network_name
-
-                next_tx['id'] = network_name + "_" + i_block['hash']
-                next_tx['transaction_hash'] = i_block['hash']
-                next_tx['sender_address'] = i_block['from']
-
                 next_tx['transaction_type_name'] = 'payment'
                 next_tx['transaction_subtype_name'] = 'payment'
 
