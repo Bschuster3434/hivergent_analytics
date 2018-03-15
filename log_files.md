@@ -155,3 +155,35 @@ than have a 'contractAddress' in the receipt. I assume this is the indicator,
 but I'll have to look at a few more examples to be certain. For now, I'm just
 going to assume these need to be handled at some point and continue with
 just smart contracts.
+
+#Brian Notes 3/15/18
+
+And after a small break(down), we're back. So, this smart contract stuff is just
+not going easily into the night. So, first things first, I need to get rid of
+all the contracts and shit available that decidely are uncategorizable, at least
+under the current schema. I need to only look at things that have abi data and
+can actually be viewed under this context. Out of the 300,000+ contracts, I don't
+think there are many, but every one counts. Why? Because I don't understand how to
+categorize abis well enough to programatically handle them. So to figure this out,
+I need to get ALL the data that I know is available and get the data into a SS
+to start analyzing them. And 300,000 tx ain't fucking going in a SS.
+
+Really, the biggest thing I want to handle is payments... that's the biggest thing.
+If I can figure out how to get smart contract payments into the datamart, this thing
+will be incredible on it's own. It pisses me off to no end that DEX data is going
+to have to wait some time, but that's the life of an adventurer in this space.
+
+As far as actually seeing the ABI, I'm going to need to do some really janky
+BS to get everything in. My script to read it will be relatively simple, but
+I need a lot of space to actually get everything onto a SS. Once I get there, I
+can start thinking through future steps.
+
+Another thing: adding my pandas dataframe of ABI data slowed my script down to a
+crawl. What used to be a 3 minute process seems to be going 10X slower, at least.
+So there are some optimizations to be made when we go to prod (for example, not
+using pandas for this type of scripting, just native python). Not the biggest
+bugger-boo to be concerned about, but something worth keeping in mind going forward.
+
+Completely unrelated: I'm going to go back to re-read the Martian, because I
+could use Mark Watney's inspiration to handle this. Just one problem at a time,
+Brian....
