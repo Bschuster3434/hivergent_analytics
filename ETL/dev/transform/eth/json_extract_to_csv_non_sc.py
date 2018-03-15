@@ -9,6 +9,9 @@ from dateutil import tz
 json_dir = r"C:\Users\Bschuster\Documents\hivergent_analytics"
 json_dir += r"\ETL\dev\api_extracts\eth\json"
 
+#ABI Research for 12/31/17
+df_abi = pd.read_csv('123117_smart_contract_abis.csv')
+
 #Global Variables
 wei_in_ETH = 1000000000000000000
 network_name = 'ethereum'
@@ -83,7 +86,35 @@ def process_ethereum_json(json_data):
                     next_tx['fee'] = tx_cost_in_ETH(gas_used, gas_price)
 
                 else:
-                    continue
+                    #If no ABI, categorize and move on. Nothing to do.
+                    try:
+                        abi_check = df_abi[(df_abi['smart_contract_hash'] == i_block['to'])]['abi_corrected'].iloc[0] == 'none'
+
+                    #If ABI is not found, treat it as uncategorizable
+                    except IndexError:
+                        next_tx['transaction_type_name'] = 'admin'
+                        next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
+
+                        next_tx['status'] = int(i_receipt['status'],0)
+
+                        #Calculating fee
+                        gas_price = int(i_block['gasPrice'],0)
+                        gas_used = int(i_receipt['gasUsed'],0)
+                        next_tx['fee'] = tx_cost_in_ETH(gas_used, gas_price)
+
+                    if abi_check:
+                        next_tx['transaction_type_name'] = 'admin'
+                        next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
+
+                        next_tx['status'] = int(i_receipt['status'],0)
+
+                        #Calculating fee
+                        gas_price = int(i_block['gasPrice'],0)
+                        gas_used = int(i_receipt['gasUsed'],0)
+                        next_tx['fee'] = tx_cost_in_ETH(gas_used, gas_price)
+
+                    else:
+                        continue
             #rest of the transaction processing otherwise
             else:
                 next_tx['transaction_type_name'] = 'payment'
