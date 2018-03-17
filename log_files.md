@@ -187,3 +187,13 @@ bugger-boo to be concerned about, but something worth keeping in mind going forw
 Completely unrelated: I'm going to go back to re-read the Martian, because I
 could use Mark Watney's inspiration to handle this. Just one problem at a time,
 Brian....
+
+#Brian Notes 3/16/18
+
+So, onto the next part: just splitting the abi down into something intelligible.
+In order to figure out how ethereum wants to view this data, I just want to see
+how it's giving me data. I understand that there will be a fair amount of
+truncation and classification, but I really don't want to implement a full
+decoder at this point... after all, I'm just interested in getting payments. So
+all I want to do is just take the data I'm being give and just get it down into
+a csv. Shouldn't be too hard to do...
