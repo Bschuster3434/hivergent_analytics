@@ -197,3 +197,49 @@ truncation and classification, but I really don't want to implement a full
 decoder at this point... after all, I'm just interested in getting payments. So
 all I want to do is just take the data I'm being give and just get it down into
 a csv. Shouldn't be too hard to do...
+
+#Brian Notes 3/18/18
+
+Alright, I have a list of six things I need to do to get this son of a bitch
+out the door. The first and most important thing is getting a process to be
+able to process smart contract inputs and outputs and categorize them based on
+their function name. This has some issues associated with it, but at this point
+I really don't have the time to go through every edge case (and with 19K+ smart
+contracts, there will be edge cases.) Time to get to work.
+
+So, I'm now doing a more extensive test on the CSV solution. It'll give me about
+20 JSON files worth of block data and allow me to start codifying the transactions
+on this list. Currently, I am not aiming for completion, but just trying to knock
+off as many transactions as possible to get something comprehensive... at least
+until I can find a better long term solution.
+
+However, another datapoint I need to figure out: decimals. A little background:
+when you create a token on Ethereum, the unit that the smart contract actually
+transacts in is actually the smallest unit possible for that token. It would be
+like every US dollar transaction being in pennies to describe how much money is
+being passed back to you. So everything being done in the input level needs to
+be converted. What I was hoping for was a consistent standard for (say 18
+decimals) so I could just do one hard coded convert and be done. After a basic
+look, that ain't happening. So now I need to get my data elements converted
+in a more programatic way... I may re-hire my researcher to add this data.
+
+Nope, no research for you! I got a webscraper called 'Octoparse' that basically
+just takes a list of URLs (which I have) and grabs me the data I need from a
+single static page. It's so simple. I may go after my entire smart contract list
+tonight trying to do this and see how it works. Regardless, I got decimals now.
+
+Okay, so I got a really, really janky way of getting pricing data. CryptoCompare
+has an easy to use API that gives me High and Low value for a token. So, I just
+grabbed the high value for each token and shoved that SOB into the excel spreadsheet.
+So now we have price. Yay! But now I need a way to get that into my datamart.
+The way I would like to do it is to have it be part of my ETL process and have
+a list of tokens to add in. I don't like this method, not just because it's
+fucking stupid, but because I WILL have gaps that need to be filled. The best
+place to handle this would be in the datamart, after the factTable has been
+created. However, this throws a little wrench into my 'no-staging-table' schema.
+
+I'm starting to think at this point that each blockchain should have it's own
+table, then then do a giant union at the end, which brings in the other data
+sources. It shouldn't take too much work to reconfigure what I have. And, I can
+then test based on individual blockchains and re-run scripts just off of that
+details. I'm going to do some testing.
