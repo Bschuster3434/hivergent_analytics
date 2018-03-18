@@ -64,7 +64,8 @@ def grab_timeframe_transactions(iso_next_start_datetime, iso_next_end_datetime):
 
     params = {"start": iso_next_start_datetime , "end" : iso_next_end_datetime, "limit" : 100}
     while True:
-        if len(transactions) % 500 == 0:
+        if len(transactions) % 50 == 0:
+            time.sleep(1)
             print "Number of transactions processed: " + str(len(transactions))
         resp = requests.get(url_endpoint, params=params)
         resp_dict = json.loads(resp.content)
