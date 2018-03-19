@@ -92,13 +92,13 @@ def process_ripple_json(json_data):
                 next_tx['sent_currency_amount'] = i['tx']['TakerGets']['value']
 
                 #Amount Sent Denomination
-                next_tx['sent_currency_name'] = i['tx']['TakerGets']['currency']
+                next_tx['sent_currency_name'] = i['tx']['TakerGets']['currency'].upper()
 
                 #Amount Received
                 next_tx['exchange_received_amount'] = i['tx']['TakerPays']['value']
 
                 #Received Denomination
-                next_tx['exchange_received_currency_name'] = i['tx']['TakerPays']['currency']
+                next_tx['exchange_received_currency_name'] = i['tx']['TakerPays']['currency'].upper()
 
 
             #Sender Pays in XRP, but Receives not XRP
@@ -116,7 +116,7 @@ def process_ripple_json(json_data):
                 next_tx['exchange_received_amount'] = i['tx']['TakerPays']['value']
 
                 #Received Denomination
-                next_tx['exchange_received_currency_name'] = i['tx']['TakerPays']['currency']
+                next_tx['exchange_received_currency_name'] = i['tx']['TakerPays']['currency'].upper()
 
             #Sender Pays in not XRP and receives XRP
             elif type(i['tx']["TakerGets"]) == type({}) and type(i['tx']["TakerPays"]) != type({}):
@@ -127,7 +127,7 @@ def process_ripple_json(json_data):
                 next_tx['sent_currency_amount'] = i['tx']['TakerGets']['value']
 
                 #Amount Sent Denomination
-                next_tx['sent_currency_name'] = i['tx']['TakerGets']['currency']
+                next_tx['sent_currency_name'] = i['tx']['TakerGets']['currency'].upper()
 
                 #Amount Received
                 next_tx['exchange_received_amount'] = '{0:f}'.format(int(i['tx']['TakerPays'])/float(1000000))
@@ -163,13 +163,13 @@ def process_ripple_json(json_data):
                     next_tx['exchange_received_amount'] = i['tx']['Amount']['value']
 
                     #Received Denomination
-                    next_tx['exchange_received_currency_name'] = i['tx']['Amount']['currency']
+                    next_tx['exchange_received_currency_name'] = i['tx']['Amount']['currency'].upper()
 
                     #Amount Sent
                     next_tx['sent_currency_amount'] = i['tx']['Amount']['value']
 
                     #Amount Sent Denomination
-                    next_tx['sent_currency_name'] = i['tx']['Amount']['currency']
+                    next_tx['sent_currency_name'] = i['tx']['Amount']['currency'].upper()
 
                 else:
                     #Amount Received

@@ -44,7 +44,7 @@ def process_block_transactions(block_tx):
         next_tx['blockchain_network_name'] = 'bitcoin'
 
         #sent currency name
-        next_tx['sent_currency_name'] = 'btc'
+        next_tx['sent_currency_name'] = 'BTC'
 
         #status
         #if it's included in the BTC blockchain, it succeeded
