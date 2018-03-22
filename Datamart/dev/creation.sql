@@ -18,12 +18,15 @@ CREATE TABLE factTransactions
   exchange_received_amount decimal(30,15),
   status int
 );
-CREATE TABLE tokenPrice
+CREATE TABLE currencyDetails
 (
   id VARCHAR(256),
   currency_name VARCHAR(40),
-  cryptocurrency_or_fiat VARCHAR(40),
-  usd_value_per_token decimal(30,15)
+  network_name VARCHAR(40),
+  usd_value decimal(30,15),
+  smart_contract_hash VARCHAR(256),
+  smart_contract_name VARCHAR(256),
+  decimal int
 );
 CREATE TABLE stageBitcoinTransactions
 (
