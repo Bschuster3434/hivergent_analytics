@@ -5,6 +5,8 @@ import time
 import pandas as pd
 from dateutil import tz
 import sha3
+import sys
+import math
 
 
 #JSON directory location
@@ -18,6 +20,16 @@ df_abi = pd.read_csv('123117_smart_contract_abis.csv')
 df_sc_desc = pd.read_csv('123117_final_processed_sc.csv')
 df_sc_desc = df_sc_desc.fillna('nan')
 
+#Smart Contract Admin Types
+with open('token_categories/nonfungible_contracts.txt', 'r') as f:
+    nonfungible_function_names = f.read().split('\n')
+
+with open('token_categories/admin_contracts.txt', 'r') as f:
+    admin_function_names = f.read().split('\n')
+
+with open('token_categories/non_token_smart_contracts.txt', 'r') as f:
+    non_token_sc_function_names = f.read().split('\n')
+
 #Global Variables
 wei_in_ETH = 1000000000000000000
 network_name = 'ethereum'
@@ -29,9 +41,10 @@ def process_input(input_data):
     '''
     result = {}
 
+    start_data_input = input_data[10:]
     for i in range(len(input_data[10:])/64):
-        next_input = input_data[:64]
-        start_data_input = input_data[64:]
+        next_input = start_data_input[:64]
+        start_data_input = start_data_input[64:]
         next_label = 'data_' + str(i).zfill(3)
         result[next_label] = next_input
 
@@ -93,13 +106,14 @@ def categorize_smart_contract(next_tx, tx_data, abi):
         return next_tx
 
     #Has a Function Path
+    next_tx['transaction_function_name'] = ascii_name
     processed_input_data = process_input(next_input)
     sc_description = df_sc_desc[(df_sc_desc['smart_contract_hash'] == i_block['to'])]
 
+    #ERC20 Token Transfer
     if ascii_name == "transfer(address,uint256)":
         next_tx['transaction_type_name'] = 'payment'
         next_tx['transaction_subtype_name'] = 'token_transfer'
-        next_tx['transaction_function_name'] = ascii_name
 
         #No Smart Contract Description
         #Just return the tx
@@ -115,11 +129,26 @@ def categorize_smart_contract(next_tx, tx_data, abi):
 
         raw_sent_amount = int(processed_input_data['data_001'], 16)
         if sc_description['decimal'].iloc[0] == 0:
-            next_tx['sent_currency_amount'] = str(raw_sent_amount)
+            next_tx['sent_currency_amount'] = raw_sent_amount
         else:
-            next_tx['sent_currency_amount'] = str(raw_sent_amount/(sc_description['decimal'].iloc[0] * 10))
-
+            next_tx['sent_currency_amount'] = float(raw_sent_amount)/math.pow(10, int(sc_description['decimal'].iloc[0]))
         return next_tx
+
+    elif ascii_name in nonfungible_function_names:
+        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_subtype_name'] = 'nonfungible_token_activity'
+
+    elif ascii_name in admin_function_names:
+        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_subtype_name'] = 'admin_activity'
+
+    elif ascii_name in non_token_sc_function_names:
+        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_subtype_name'] = 'non_token_smart_contract_activity'
+
+    else:
+        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
 
     return next_tx
 
@@ -225,7 +254,7 @@ def process_ethereum_json(json_data):
                 next_tx['transaction_subtype_name'] = 'payment'
 
                 next_tx['sent_currency_name'] = 'ETH'
-                next_tx['sent_currency_amount'] = int(i_block['value'],0)/float(wei_in_ETH)
+                next_tx['sent_currency_amount'] = str(int(i_block['value'],0)/float(wei_in_ETH))
 
             processed_transactions.append(next_tx)
 
@@ -283,7 +312,6 @@ def main():
         ##the same name
 
         store_transaction_data(transactions, json_file_name)
-        break
 
 
 main()
