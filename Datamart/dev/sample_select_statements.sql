@@ -25,3 +25,14 @@ where sent_currency_name != ''
 Group By blockchain_network_name,
 sent_currency_name
 ;
+
+--Currency Amounts
+SELECT a.id,
+a.datetime ,
+a.sent_currency_name,
+a.sent_currency_amount,
+b.usd_value,
+(CAST(a.sent_currency_amount AS DECIMAL(20,2)) * CAST(b.usd_value AS DECIMAL(20,2)))
+FROM public.facttransactions a
+LEFT OUTER JOIN public.currencytoudsconversion b ON a.sent_currency_name = b.currency_name
+LIMIT 1000;
