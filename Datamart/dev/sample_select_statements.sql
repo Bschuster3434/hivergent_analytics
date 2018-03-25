@@ -36,3 +36,6 @@ b.usd_value,
 FROM public.facttransactions a
 LEFT OUTER JOIN public.currencytoudsconversion b ON a.sent_currency_name = b.currency_name
 LIMIT 1000;
+
+--Play Around with USD Values
+SELECT * from public.view_facttransactionusd limit 100;

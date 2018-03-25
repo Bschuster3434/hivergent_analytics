@@ -93,3 +93,25 @@ CREATE TABLE stageEthereumTransactions
   exchange_received_amount decimal(38,19),
   status int
 );
+CREATE TABLE factTransactionsUSD
+(
+  id VARCHAR(256),
+  datetime timestamp,
+  unixtimestamp int,
+  transaction_hash VARCHAR(256),
+  sender_address VARCHAR(256),
+  transaction_type_name VARCHAR(40),
+  transaction_subtype_name VARCHAR(40),
+  transaction_function_name VARCHAR(256),
+  fee decimal(38,19),
+  fee_usd decimal(38,6),
+  fee_currency_name VARCHAR(40),
+  blockchain_network_name VARCHAR(40),
+  sent_currency_name VARCHAR(40),
+  sent_currency_amount decimal(38,19),
+  sent_currency_amount_usd decimal(38,6),
+  exchange_received_currency_name VARCHAR(40),
+  exchange_received_amount decimal(38,19),
+  exchange_received_amount_usd decimal(38,6),
+  status int
+);
