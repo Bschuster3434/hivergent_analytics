@@ -70,6 +70,8 @@ def process_block_transactions(block_tx):
             #Sent Currency Amount
             next_tx['sent_currency_amount'] = i['outputs_value']/float(satoshi_to_BTC)
 
+            processed_transactions.append(next_tx)
+
         else:
 
             for n, send_tx in enumerate(i['inputs']):
@@ -101,7 +103,7 @@ def process_block_transactions(block_tx):
                 virtual_sent = send_tx['prev_value'] - virtual_fee
                 next_tx['sent_currency_amount'] = virtual_sent/float(satoshi_to_BTC)
 
-        processed_transactions.append(next_tx)
+                processed_transactions.append(next_tx)
 
     return processed_transactions
 
