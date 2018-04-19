@@ -128,9 +128,9 @@ def grab_transactions_from_api(start_datetime, end_datetime, minutes_per_file, t
 
 def main():
     print "Starting Process"
-    start_datetime = datetime.datetime(2018,1,1,0,0)
+    start_datetime = datetime.datetime(2017,12,30,19,0)
     iso_start_datetime = start_datetime.isoformat()
-    end_datetime = datetime.datetime(2018,1,1,5,0)
+    end_datetime = datetime.datetime(2017,12,31,0,0)
     iso_end_datetime = end_datetime.isoformat()
     minutes_per_file = 5
     ts_file = "latest_timestamp.txt"
