@@ -1,3 +1,28 @@
+TESTING TO BE COMPLETED
+
+Transform Layer
+- Create Sent Currency Type
+- Create Organization Type
+- Create Smart Contract Type
+- Standardize Currency Names
+- Standardize Transaction Types
+
+Database Layer
+- Create Failed/Success Status Table
+
+FINAL TESTING
+- Check Total number of Bitcoin Transactions
+  Data found to be consistent with the expected results. Fix for synthetic transactions.
+- Fix IDs
+  FIX FOUND: Tested on Bitcoin and confirmed okay. Ripple and Ethereum Compliant.
+- Fix Timeframes and Re-run Scripts
+  Bitcoin: Complete (UTC and Datetime Matched)
+  Ethereum: Alter Date conversion to be UTC (Fix completed, in transit)
+  Ripple: Re-run first five hours of the day, altered date conversion 
+- Standardize Blockchain Name
+  -Global variables confirmed testing in csv
+
+
 Data Needs
 
 - Token Name
