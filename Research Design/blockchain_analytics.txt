@@ -1,0 +1,63 @@
+Project Plan
+- Collect your list of questions and categorize them from an impact/effort
+  perspective. Rank order the two of them to figure out which questions to answer.
+- Create a list of QA requirements for the different data definitions and begin
+  to fix the data.
+- Define the tables and datasets you would need to answer each of your questions
+  based on the questions you asked. Do not worry about having to many or few,
+  or even having some of them just as scripts. We don't care to have this be
+  part of a pipeline.
+- Execute on this, reload the data into redshift, get the data out that you need
+  and then have the data just ready to go without needing redshift. Have a
+  generic dataset for Taylor to play around in.
+- Visualize in Quicksight for ease of use, or use excel or some other datasource
+  for my uses.
+
+Cross Chain Questions
+-	What percentage of cryptoassets were being traded across other blockchains such as ripple?
+-	What percentage of fees were being spent hourly on each blockchain?
+-	Which smart contracts were the most utilized across blockchains?
+-	What were the average fees, in dollars, spent in each blockchain?
+-	Which blockchains were the most utilized?
+-	What types of blockchain transaction activity was most prevalent by blockchain type?
+-	What was the percentage of accounts that were sending the most transactions? Which accounts were sending the most dollar value transactions?
+- What were the number of exchange transactions across Ripple and Ethereum?
+
+Ethereum Questions
+-	Which Smart Contracts were the most utilized for the day?
+-	Which functions were the most common? How common were they?
+-	What ERC-20 tokens were the most traded and used?
+-	What percentage of value on Ethereum was traded in ETH vs ERC 20 tokens?
+- How many smart contracts were executed in a single day?
+- What were the most common ERC-721 Contracts being Utilized
+- Which markets were prevalent in the Smart Contract Realm? Were there any
+  clear winners?
+
+QA Requirements
+
+id VARCHAR(256),
+-- Each id needs to be in the following format
+--- <blockchain_name>_<hash_id>_<transaction_part>
+datetime timestamp,
+-- timestampe needs to be in ISO format
+-- timestamp must be between 12am and 11:59:59pm (inclusive) on 12/31/17
+unixtimestamp int,
+-- Must be an integer
+transaction_hash VARCHAR(256),
+sender_address VARCHAR(256),
+transaction_type_name VARCHAR(40),
+--Type names across the board need to consistently fit into one of three
+--activities
+---Admin
+---Payment
+---Exchange
+transaction_subtype_name VARCHAR(40),
+--Subtype name must fit the schema between transactions
+transaction_function_name VARCHAR(256),
+fee decimal(38,19),
+fee_currency_name VARCHAR(40),
+blockchain_network_name VARCHAR(40),
+--When in doubt, lower case
+sent_currency_name VARCHAR(40),
+sent_currency_amount decimal(38,19),
+status int

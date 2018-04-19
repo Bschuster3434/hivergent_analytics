@@ -1,0 +1,69 @@
+Data Needs
+
+- Token Name
+- Smart Contract/Organization Name?
+- Blockchain Network Name
+- Unique Transaction Id
+- Smart Contract Function Name 
+- Datetime
+- Sender Address
+- Token Name 
+- Amount Sent in Currency 
+- Amount Sent in USD
+- Currency Type (Fiat, Native Asset, Token)
+- Transaction Type 
+- Fee Sent in Cryptocurrency
+- Fee Sent in USD
+
+Transaction Types 
+- P2P Payment
+- Exchange Activity
+- ICO Payment 
+- Payment to an Exchange 
+- Administrative
+- Contract Bid
+- Smart Contract Movement
+- Token Distribution
+- Payment into a DAO
+
+How many datasets
+- Cross Blockchain Dataset (without function or org names)
+  id VARCHAR(256),
+  datetime timestamp,
+  unixtimestamp int,
+  transaction_hash VARCHAR(256),
+  sender_address VARCHAR(256),
+  transaction_type_name VARCHAR(40),
+  fee decimal(38,19),
+  fee_usd decimal(38,19),
+  fee_currency_name VARCHAR(40),
+  blockchain_network_name VARCHAR(40),
+  sent_currency_type VARCHAR(40),
+  sent_currency_name VARCHAR(40),
+  sent_currency_amount decimal(38,19),
+  sent_currency_amount_USD decimal(38,19),
+  status int
+  
+- Ethereum Blockchain Dataset (with organizations/tokens/etc)
+  id VARCHAR(256),
+  datetime timestamp,
+  unixtimestamp int,
+  transaction_hash VARCHAR(256),
+  sender_address VARCHAR(256),
+  smart_contract_name (boolean),
+  smart_contract_type VARCHAR(256),
+  organization_name VARCHAR(256),
+  organization_type VARCHAR(256),
+  transaction_type_name VARCHAR(40),
+  function_name VARCHAR(256),
+  fee decimal(38,19),
+  fee_usd decimal(38,19),
+  fee_currency_name VARCHAR(40),
+  blockchain_network_name VARCHAR(40),
+  sent_currency_type VARCHAR(40),
+  sent_currency_name VARCHAR(40),
+  sent_currency_amount decimal(38,19),
+  sent_currency_amount_USD decimal(38,19),
+  status int
+  
+Plus Ad Hoc SQL Lists that will pull from these datasets
