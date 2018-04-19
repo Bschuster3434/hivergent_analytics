@@ -1,14 +1,22 @@
 TESTING TO BE COMPLETED
 
 Transform Layer
-- Create Sent Currency Type
-- Create Organization Type
-- Create Smart Contract Type
-- Standardize Currency Names
 - Standardize Transaction Types
 
+Datasets
+- Standardize Currency Dataset
+  IN PROGRESS
+  Top 1000 Contracts Completed
+  Scrapping additional smart contract data
+- Create Smart Contract Dataset
+
 Database Layer
-- Create Failed/Success Status Table
+- Validate and Load New CSVs for blockchain data
+- Update Load statement for correct timeframes
+  -Ripple Only
+- Load Currency Data (and create dimension table)
+- Load Smart Contract Data (and create dimenion table)
+- Create Failed/Success Status Tables
 
 FINAL TESTING
 - Check Total number of Bitcoin Transactions
@@ -90,5 +98,18 @@ How many datasets
   sent_currency_amount decimal(38,19),
   sent_currency_amount_USD decimal(38,19),
   status int
+
+- Currency and Smart Contract Dataset
+  Completed - Smart Contract Hash (if applicable)
+  Completed - Smart Contract Name
+  Completed - Currency Code
+  Completed - Currency Decimal
+  Completed - Currency to USD
+  Completed - Smart Contract Type
+  Completed - Currency Type
+  Completed - Organization Name
+  Removed (not needed b/c of contract type) Organization Type
+  
+  
   
 Plus Ad Hoc SQL Lists that will pull from these datasets
