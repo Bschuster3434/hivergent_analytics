@@ -8,8 +8,9 @@ from dateutil import tz
 json_dir = r"C:\Users\Bschuster\Documents\hivergent_analytics"
 json_dir += r"\ETL\dev\api_extracts\btc\json"
 
-#Number of Satoshi in satoshi_to_BTC
+#Global Variabls
 satoshi_to_BTC = 100000000
+network_name = "bitcoin"
 
 def process_block_transactions(block_tx):
     '''
@@ -41,7 +42,7 @@ def process_block_transactions(block_tx):
         next_tx['datetime'] = utc_timestamp.strftime("%Y-%m-%d %H:%M:%S")
 
         #blockchain network name
-        next_tx['blockchain_network_name'] = 'bitcoin'
+        next_tx['blockchain_network_name'] = network_name
 
         #sent currency name
         next_tx['sent_currency_name'] = 'BTC'
@@ -53,7 +54,7 @@ def process_block_transactions(block_tx):
         #If Coinbase, sender is coinbase and will be sent as such
         if i['is_coinbase'] == True:
             #id
-            next_tx['id'] = i['hash']
+            next_tx['id'] = network_name + "_" + str(i['hash']) + "_" + '0'
 
             #Sender Address
             next_tx['sender_address'] = 'coinbase'
@@ -75,18 +76,20 @@ def process_block_transactions(block_tx):
         else:
 
             for n, send_tx in enumerate(i['inputs']):
+                #For each sythetic transaction, copy the details into a new dict.
+                iter_tx = next_tx.copy()
                 #id
-                next_tx['id'] = str(i['hash']) + '_' + str(n)
+                iter_tx['id'] = network_name + "_" + str(i['hash']) + '_' + str(n)
 
                 #Sender Address
-                next_tx['sender_address'] = send_tx['prev_addresses'][0]
+                iter_tx['sender_address'] = send_tx['prev_addresses'][0]
 
                 #Transaction Type
-                next_tx['transaction_type_name'] = 'payment'
+                iter_tx['transaction_type_name'] = 'payment'
 
                 #Transaction Subtype
                 #Will likely need to be re-worked to get more complexity
-                next_tx['transaction_subtype_name'] = 'simple_payment'
+                iter_tx['transaction_subtype_name'] = 'simple_payment'
 
                 #virtual fee calc
                 #Virtual fee calculated because each send does not have a few, but the whole tx
@@ -95,15 +98,15 @@ def process_block_transactions(block_tx):
                 total_value_of_inputs = i['inputs_value']
                 percent_of_total_tx_sent = send_tx['prev_value']/float(total_value_of_inputs)
                 virtual_fee = i['fee'] * percent_of_total_tx_sent
-                next_tx['fee'] = virtual_fee/float(satoshi_to_BTC)
+                iter_tx['fee'] = virtual_fee/float(satoshi_to_BTC)
 
                 #Sent Currency Amount
                 #With a virtual fee, we need a virtual sent amount
                 #Real sent minus virtual fee = virtual sent
                 virtual_sent = send_tx['prev_value'] - virtual_fee
-                next_tx['sent_currency_amount'] = virtual_sent/float(satoshi_to_BTC)
+                iter_tx['sent_currency_amount'] = virtual_sent/float(satoshi_to_BTC)
 
-                processed_transactions.append(next_tx)
+                processed_transactions.append(iter_tx)
 
     return processed_transactions
 

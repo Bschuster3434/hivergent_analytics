@@ -7,11 +7,15 @@ from dateutil import tz
 import sha3
 import sys
 import math
-
+import pytz
 
 #JSON directory location
 json_dir = r"C:\Users\Bschuster\Documents\hivergent_analytics"
 json_dir += r"\ETL\dev\api_extracts\eth\json"
+
+#Global Variables
+wei_in_ETH = 1000000000000000000
+network_name = 'ethereum'
 
 #ABI Research for 12/31/17
 df_abi = pd.read_csv('123117_smart_contract_abis.csv')
@@ -29,10 +33,6 @@ with open('token_categories/admin_contracts.txt', 'r') as f:
 
 with open('token_categories/non_token_smart_contracts.txt', 'r') as f:
     non_token_sc_function_names = f.read().split('\n')
-
-#Global Variables
-wei_in_ETH = 1000000000000000000
-network_name = 'ethereum'
 
 def process_input(input_data):
     '''
@@ -183,7 +183,7 @@ def process_ethereum_json(json_data):
         raw_timestamp = int(next_raw_block['result']['timestamp'],0)
 
         unix_timestamp = raw_timestamp
-        timestamp = datetime.datetime.fromtimestamp(raw_timestamp).strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.datetime.fromtimestamp(raw_timestamp, tz=pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
 
         #go through list of transactions
         for i in next_raw_transactions:

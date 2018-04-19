@@ -10,8 +10,9 @@ from dateutil import parser
 json_dir = r"C:\Users\Bschuster\Documents\hivergent_analytics"
 json_dir += r"\ETL\dev\api_extracts\xrp\json"
 
-#XRP given denomination
+#Global variables
 given_denomination_to_xrp = float(1000000)
+network_name = 'ripple'
 
 def classify_ripple_transaction_subtype(transaction_subtype):
     '''
@@ -52,8 +53,13 @@ def process_ripple_json(json_data):
 
         tx_datetime = parser.parse(i['date'])
         tx_formatted_date = tx_datetime.strftime("%Y-%m-%d %H:%M:%S")
-        unix_timestamp = int(time.mktime(tx_datetime.timetuple()))
-        network_name = 'ripple'
+
+        #Note to future devs
+        #I was not able to get the timestamp to reflect the actual unix_timestamp
+        #that the datetime was reflecting. As a cover, I decided to manually
+        #convert the timestamp to unix by subtracting 5 hours of seconds
+        #from the timestamp. This now gets us to the correct datetime.
+        unix_timestamp = int(time.mktime(tx_datetime.timetuple())) - (5 * 60 * 60) #Manually subtract 5 hours
 
         next_tx = {'datetime': tx_formatted_date, 'unixtimestamp': unix_timestamp,\
                         'blockchain_network_name': network_name}
