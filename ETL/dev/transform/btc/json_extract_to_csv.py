@@ -63,7 +63,7 @@ def process_block_transactions(block_tx):
             next_tx['transaction_type_name'] = 'payment'
 
             #Transaction Subtype
-            next_tx['transaction_subtype_name'] = 'coinbase'
+            next_tx['transaction_function_name'] = 'coinbase'
 
             #fee
             next_tx['fee'] = 0
@@ -86,10 +86,6 @@ def process_block_transactions(block_tx):
 
                 #Transaction Type
                 iter_tx['transaction_type_name'] = 'payment'
-
-                #Transaction Subtype
-                #Will likely need to be re-worked to get more complexity
-                iter_tx['transaction_subtype_name'] = 'simple_payment'
 
                 #virtual fee calc
                 #Virtual fee calculated because each send does not have a few, but the whole tx
@@ -124,7 +120,7 @@ def store_transaction_data(block_transactions, json_file_name):
     #column ordering goes here
     columns =  ['id', 'datetime', 'unixtimestamp', 'transaction_hash']
     columns += ['sender_address', 'transaction_type_name']
-    columns += ['transaction_subtype_name', 'fee', 'blockchain_network_name']
+    columns += ['transaction_function_name', 'fee', 'blockchain_network_name']
     columns += ['sent_currency_name', 'sent_currency_amount', 'status']
 
     df = df[columns]

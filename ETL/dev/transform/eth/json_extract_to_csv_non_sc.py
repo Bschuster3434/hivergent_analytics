@@ -101,7 +101,7 @@ def categorize_smart_contract(next_tx, tx_data, abi):
     #If no ascii name, means that we don't know the name of the function
     if ascii_name == None:
         #This will need to be handled as an unknown
-        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_type_name'] = 'uncategorized'
         next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
         return next_tx
 
@@ -135,19 +135,19 @@ def categorize_smart_contract(next_tx, tx_data, abi):
         return next_tx
 
     elif ascii_name in nonfungible_function_names:
-        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_type_name'] = 'action'
         next_tx['transaction_subtype_name'] = 'nonfungible_token_activity'
 
     elif ascii_name in admin_function_names:
-        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_type_name'] = 'action'
         next_tx['transaction_subtype_name'] = 'admin_activity'
 
     elif ascii_name in non_token_sc_function_names:
-        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_type_name'] = 'action'
         next_tx['transaction_subtype_name'] = 'non_token_smart_contract_activity'
 
     else:
-        next_tx['transaction_type_name'] = 'admin'
+        next_tx['transaction_type_name'] = 'action'
         next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
 
     return next_tx
@@ -209,6 +209,7 @@ def process_ethereum_json(json_data):
             gas_price = int(i_block['gasPrice'],0)
             gas_used = int(i_receipt['gasUsed'],0)
             next_tx['fee'] = tx_cost_in_ETH(gas_used, gas_price)
+            next_tx['fee_currency_name'] = 'ETH'
 
             #Status
             next_tx['status'] = int(i_receipt['status'],0)
@@ -219,7 +220,7 @@ def process_ethereum_json(json_data):
                 #A 'to' address of None type is a smart contract created
                 if i_block['to'] == None:
 
-                    next_tx['transaction_type_name'] = 'admin'
+                    next_tx['transaction_type_name'] = 'action'
                     next_tx['transaction_subtype_name'] = 'smart_contract_creation'
 
                 #Path for if there is an input and there is a SC address
@@ -233,7 +234,7 @@ def process_ethereum_json(json_data):
 
                     #If ABI is not found, treat it as uncategorizable
                     except IndexError:
-                        next_tx['transaction_type_name'] = 'admin'
+                        next_tx['transaction_type_name'] = 'uncategorized'
                         next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
 
                     #If there is an ABI... now we can start to categorize
@@ -243,7 +244,7 @@ def process_ethereum_json(json_data):
                     else:
                         #I don't think we should ever get down here, but I'm
                         #not convinced enough that we won't somehow...
-                        next_tx['transaction_type_name'] = 'admin'
+                        next_tx['transaction_type_name'] = 'uncategorized'
                         next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
 
             #If next input = '0x', then it's not a smart contract .
@@ -278,8 +279,8 @@ def store_transaction_data(transactions, json_file_name):
     #TODO: Decide if exchange amounts can be parsed
     columns =  ['id', 'datetime', 'unixtimestamp', 'transaction_hash']
     columns += ['sender_address', 'transaction_type_name']
-    columns += ['transaction_subtype_name', 'fee', 'blockchain_network_name']
-    columns += ['transaction_function_name']
+    columns += ['transaction_subtype_name', 'transaction_function_name', 'fee']
+    columns += ['fee_currency_name','blockchain_network_name']
     columns += ['sent_currency_name', 'sent_currency_amount']
     #columns += ['exchange_received_currency_name', 'exchange_received_amount']
     columns += ['status']

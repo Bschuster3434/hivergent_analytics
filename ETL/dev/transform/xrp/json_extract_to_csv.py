@@ -24,14 +24,14 @@ def classify_ripple_transaction_subtype(transaction_subtype):
 
     exchange_types = ['OfferCreate', 'OfferCancel']
     payment_types = ['Payment']
-    admin_types = ['SetRegularKey', 'TrustSet', 'AccountSet']
+    admin_types = ['SetRegularKey', 'TrustSet', 'AccountSet','EscrowCreate','SignerListSet']
 
     if transaction_subtype in exchange_types:
         return 'exchange'
     elif transaction_subtype in payment_types:
         return "payment"
     elif transaction_subtype in admin_types:
-        return 'admin'
+        return 'action'
     else:
         return "unknown"
 
@@ -70,7 +70,7 @@ def process_ripple_json(json_data):
 
         #Transaction Subype
         transaction_subtype = i['tx']['TransactionType']
-        next_tx['transaction_subtype_name'] = transaction_subtype
+        next_tx['transaction_function_name'] = transaction_subtype
 
         #Transaction type
         transaction_type = classify_ripple_transaction_subtype(transaction_subtype)
@@ -211,7 +211,7 @@ def store_transaction_data(transactions, json_file_name):
     #column ordering goes here
     columns =  ['id', 'datetime', 'unixtimestamp', 'transaction_hash']
     columns += ['sender_address', 'transaction_type_name']
-    columns += ['transaction_subtype_name', 'fee', 'blockchain_network_name']
+    columns += ['transaction_function_name', 'fee', 'blockchain_network_name']
     columns += ['sent_currency_name', 'sent_currency_amount']
     columns += ['exchange_received_currency_name', 'exchange_received_amount']
     columns += ['status']
