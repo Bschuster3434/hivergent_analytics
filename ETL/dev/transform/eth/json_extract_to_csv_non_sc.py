@@ -34,6 +34,9 @@ with open('token_categories/admin_contracts.txt', 'r') as f:
 with open('token_categories/non_token_smart_contracts.txt', 'r') as f:
     non_token_sc_function_names = f.read().split('\n')
 
+with open('token_categories/exchange_contracts.txt', 'r') as f:
+    exchange_function_names = f.read().split('\n')
+
 def process_input(input_data):
     '''
     Processes the Input for ABI.
@@ -146,6 +149,10 @@ def categorize_smart_contract(next_tx, tx_data, abi):
         next_tx['transaction_type_name'] = 'action'
         next_tx['transaction_subtype_name'] = 'non_token_smart_contract_activity'
 
+    elif ascii_name in exchange_function_names:
+        next_tx['transaction_type_name'] = 'exchange'
+        next_tx['transaction_subtype_name'] = 'exchange_activity'
+
     else:
         next_tx['transaction_type_name'] = 'action'
         next_tx['transaction_subtype_name'] = 'uncategorized_smart_contract'
@@ -217,11 +224,15 @@ def process_ethereum_json(json_data):
             #An input assumes a smart contract
             if next_input != u'0x':
 
+                #Adding Smart Contract Figure into Script
+                next_tx['smart_contract_hash'] = i_block['to']
+
                 #A 'to' address of None type is a smart contract created
                 if i_block['to'] == None:
 
                     next_tx['transaction_type_name'] = 'action'
                     next_tx['transaction_subtype_name'] = 'smart_contract_creation'
+                    next_tx['transaction_function_name'] = 'smart_contract_creation'
 
                 #Path for if there is an input and there is a SC address
                 #Being Sent To
@@ -278,7 +289,7 @@ def store_transaction_data(transactions, json_file_name):
     #column ordering goes here
     #TODO: Decide if exchange amounts can be parsed
     columns =  ['id', 'datetime', 'unixtimestamp', 'transaction_hash']
-    columns += ['sender_address', 'transaction_type_name']
+    columns += ['sender_address', 'smart_contract_hash', 'transaction_type_name']
     columns += ['transaction_subtype_name', 'transaction_function_name', 'fee']
     columns += ['fee_currency_name','blockchain_network_name']
     columns += ['sent_currency_name', 'sent_currency_amount']

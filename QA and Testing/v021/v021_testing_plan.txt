@@ -23,6 +23,20 @@ How is this possible?
 https://etherscan.io/tx/0xdd34be08c8d70ddca20d602d03b20af8a2a366720f9cf61ad3c6b97ee02180e5
 
 2 'SmartContractHash' Not included and used in the dataset
+I want to add Smart Contract Hash and that data in the most efficient way possible.
+I think that is I just create a separate table and load just the ethereum
+table into that, I'll be able to create the script I'm looking for.
+
+- Alter Transform Script to include that new data
+- Re-run the transform script to include this new data
+- Upload the data into S3
+- Run the Ethereum Reload Scripts
+- New SQL Script for Creation of dataset
+- Confirm SQL Load will not be impacted
+- Insert and load new data
+- Create the next insert script into factEthereumTransactionsTable
+- Load Data into quicksight
+
 3 Ripple Currency Values might be inaccurate
 Found a transaction "28FD2E1ED0DEAB80C835B25577054367ACC790F0B7773C2966C9E1CA5020C264"
 Where someone traded BTC for BTC, but it's not real BTC, because they sent
@@ -34,3 +48,9 @@ Where someone traded BTC for BTC, but it's not real BTC, because they sent
 Seems that there are a few transactions that have some funny business, but
 nothing that makes me think that this is a deal breaker. I'll add the additional
 datasets and see how that works.
+
+After reviewing the data, the process is not incorrect. It just seems that there
+are some significant outliers that are screwing with my data.
+
+4 Adding etherdelta exchange activity to the mix
+Wanting to get Etherdelta exchange activity added to the list of contracts

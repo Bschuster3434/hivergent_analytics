@@ -56,6 +56,7 @@ CREATE TABLE v2.stageEthereumTransactions
   unixtimestamp int,
   transaction_hash VARCHAR(256),
   sender_address VARCHAR(256),
+  smart_contract_hash VARCHAR(256),
   transaction_type_name VARCHAR(40),
   transaction_subtype_name VARCHAR(40),
   transaction_function_name VARCHAR(256),
