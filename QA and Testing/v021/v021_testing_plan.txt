@@ -1,0 +1,36 @@
+Found Bugs:
+1
+KIN Token is not getting valued correctly from a USD perspective.
+-- Seems that there are a collection of cryptocurrencies that are inaccurately
+-- categorized. I will go through the dataset and clean those as need.
+
+Error Identification and Process
+- Checking the smart contract table where $ values are made for each token.
+- My gut is that the values were incorrect there and need to be manually
+- Fixed for each identified to be wrong.
+
+- Seems that there are some wildly inaccurate $'s here. I will be fixing these
+- values using CoinMarketCap estimates for that day.
+
+- Data will be fixed, then reloaded into the datamart via S3 upload and truncate
+- and reload.
+
+- After that, this dataset needs to be reloaded. In order for the change to take
+- place, the cross transaction table needs to be truncated and the data reloaded
+- into it. That can happen later.
+
+How is this possible?
+https://etherscan.io/tx/0xdd34be08c8d70ddca20d602d03b20af8a2a366720f9cf61ad3c6b97ee02180e5
+
+2 'SmartContractHash' Not included and used in the dataset
+3 Ripple Currency Values might be inaccurate
+Found a transaction "28FD2E1ED0DEAB80C835B25577054367ACC790F0B7773C2966C9E1CA5020C264"
+Where someone traded BTC for BTC, but it's not real BTC, because they sent
+20,000,000 of it.
+
+- http://www.ripplescan.com/accounts/rHSFu2BEV15GY3QmDeFznRXqgXkMhihccC
+- https://xrpcharts.ripple.com/#/transactions/C6BD4F0E7862446C4B51F47BAEE40659BB3831BAA3203F0CF1CAE2910DB2F77E
+
+Seems that there are a few transactions that have some funny business, but
+nothing that makes me think that this is a deal breaker. I'll add the additional
+datasets and see how that works.

@@ -9,17 +9,6 @@ set fee_currency_name = 'BTC';
 
 --eth
 
---dimCurrency
-
-INSERT INTO dev.v2.dimCurrency
-(
-  SELECT DISTINCT currency_type
-       , currency_name
-       , network_name
-       , usd_value
- FROM dev.v2.dimcurrencyandsmartcontracts
-);
-
 --factCrossTransactionsTable
 --btc
 INSERT INTO dev.v2.factCrossTransactionsTable (
