@@ -3,8 +3,6 @@ TESTING TO BE COMPLETED
 
 Transform Layer
 
-Database Layer
-- Create Cross Transaction Table
 
 FINAL TESTING
 - Check Total number of Bitcoin Transactions
@@ -38,6 +36,7 @@ FINAL TESTING
   ---original script. 'fee_currency_name' was added.
 - Load Currency Data (and create dimension table)
 - Load Smart Contract Data (and create dimenion table)
+- Create Cross Transaction Table
 
 
 Data Needs
@@ -123,6 +122,6 @@ How many datasets
 
 Plus Ad Hoc SQL Lists that will pull from these datasets
 
-STAGE III
+STAGE II
 
 - Add Smart Contract Hash to ETL
