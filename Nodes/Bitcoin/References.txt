@@ -1,0 +1,37 @@
+Costing Resources
+
+Cost of Bitcoin Node
+- https://www.reddit.com/r/Bitcoin/comments/68wr8d/running_a_full_node_on_amazon_aws/
+
+2014 Cost of Running Bitcoin Node
+- https://pghalliday.com/aws/bitcoin/2014/05/02/running-a-full-bitcoin-node-on-aws.html
+-- Up to 200GB of data out of the Bitcoin Node every month
+
+Cost of Running Bitcoin Node
+- https://news.bitcoin.com/cost-full-bitcoin-node/
+
+Running a Bitcoin Node Resource
+- https://bitcoin.org/en/full-node#minimum-requirements
+
+Bitcoin Install Instruction
+- http://blog.domenech.org/2016/04/how-to-install-bitcoin-classic-on-amazon-linux-aws-ec2.html
+
+Bitcoin Port + Security Groups
+- https://bitcoin.stackexchange.com/questions/41828/how-to-open-the-port-8332-on-ec2-instance
+
+Bitcoin Full Node Ubuntu 16.04
+- https://bitcoin.org/en/full-node#ubuntu-1604
+
+Useful file for RPC Connection
+- https://github.com/petertodd/python-bitcoinlib/blob/master/examples/ssl-rpc-connection.py
+
+Github in Python for RPC connection
+- https://github.com/jgarzik/python-bitcoinrpc
+-- This works as intended.
+
+Bitcoin Conf Options
+- https://github.com/bitcoin/bitcoin/blob/master/contrib/debian/examples/bitcoin.conf
+- https://github.com/bitcoin/bitcoin/issues/4894
+
+This was kind of cool to find:
+-https://bitcointalk.org/index.php?topic=461.40

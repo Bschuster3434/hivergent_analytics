@@ -1,0 +1,6 @@
+1) Get an EC2 Instance from the following AMI:
+-- Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-759bc50a
+-- t2.small minimum
+-- 250 GB GP2 (or better)
+2) Run bitcoin_bootstrap.sh
+3) Setup bitcoin.conf in the bitcoin folder with bitcoin.conf file

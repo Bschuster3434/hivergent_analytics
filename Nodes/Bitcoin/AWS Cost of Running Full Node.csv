@@ -1,0 +1,25 @@
+Your Estimate
+Service Type,Components,Region,Component Price,Service Price
+Amazon EC2 Service (US East (N. Virginia)),,,,$46.84
+,Compute:,US East (N. Virginia),$16.84
+,EBS Volumes:,US East (N. Virginia),$30
+,EBS IOPS:,US East (N. Virginia),$0
+Amazon S3 Service (US East (N. Virginia)),,,,$7.25
+,S3 Standard Storage:,US East (N. Virginia),$5.75
+,S3 Standard Put Requests:,US East (N. Virginia),$1.5
+Amazon DynamoDB Service (US East (N. Virginia)),,,,$0
+,Provisioned Throughput Capacity:,US East (N. Virginia),$0
+,Indexed Data Storage:,US East (N. Virginia),$0
+,DynamoDB Streams:,US East (N. Virginia),$0
+,On-demand backup:,US East (N. Virginia),$0
+,Continuous backup (PITR):,US East (N. Virginia),$0
+,Restoring a table:,US East (N. Virginia),$0
+,Global Tables:,US East (N. Virginia),$0
+AWS Data Transfer In,,,,$0
+,US East (N. Virginia) Region:,Global,$0
+AWS Data Transfer Out,,,,$17.91
+,US East (N. Virginia) Region:,Global,$17.91
+AWS Support (Basic),,,,$0
+,Support for all AWS services:,,$0
+,,Free Tier Discount:,,$-4.39
+,,Total Monthly Payment:,,$67.61
