@@ -33,5 +33,11 @@ Bitcoin Conf Options
 - https://github.com/bitcoin/bitcoin/blob/master/contrib/debian/examples/bitcoin.conf
 - https://github.com/bitcoin/bitcoin/issues/4894
 
+Bitcoin Developer Reference
+- https://bitcoin.org/en/developer-reference#addmultisigaddress
+
+Great Tutorial on Dealing with Time
+- https://howchoo.com/g/ywi5m2vkodk/working-with-datetime-objects-and-timezones-in-python
+
 This was kind of cool to find:
 -https://bitcointalk.org/index.php?topic=461.40

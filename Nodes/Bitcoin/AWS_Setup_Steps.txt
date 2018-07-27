@@ -4,3 +4,12 @@
 -- 250 GB GP2 (or better)
 2) Run bitcoin_bootstrap.sh
 3) Setup bitcoin.conf in the bitcoin folder with bitcoin.conf file
+3.5) Run bitcoind -daemon
+4) Create a Lambda Function with Python2.7 Functionality
+5) Upload the Lambda Deployment Package in the "Lambda Script for Connecting" folder
+6) Create the Dynamodb table with the following parameters
+-- Name: bitcoin_node_blocks_created
+-- Partition Key: blockNumber_instanceSize
+-- Range Key: retrievalTimeStamp
+-- R/W: 1/1
+7) Setup a cloudwatch Trigger on the lambda deployment to run every X minutes
