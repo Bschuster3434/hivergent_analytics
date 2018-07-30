@@ -1,3 +1,4 @@
+Phase 1: Set up Node and DynamoDB
 1) Get an EC2 Instance from the following AMI:
 -- Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-759bc50a
 -- t2.small minimum
@@ -13,3 +14,29 @@
 -- Range Key: retrievalTimeStamp
 -- R/W: 1/1
 7) Setup a cloudwatch Trigger on the lambda deployment to run every X minutes
+
+Phase 2: Set up Extract Scripting and Real Time Queue
+1) Create an S3 Bucket to House Your Blockchain Data with the following structure
+-- S3 Bucket Name: blockchainblockdata
+-- File Structure - /bitcoin/blocks
+2) Create a dynamodb table to collect the latest block data:
+-- Name: node_latest_block
+-- Partition Key: blockchain_name
+-- R/W: 1/1
+3) Create a dynamodb table to be a record of which functions in my application
+   are requesting data from the node to be extracted
+-- Name: node_extract_block_records
+-- Partition Key: blockchain_date
+-- R/W: 1/1
+4) Create two SQS Queues with the following names:
+-- bitcoin_realtime_queue
+-- bitcoin_historical_queue
+5) Create 3 Lambda Shells with the following Names (python2.7)
+-- Name: bitcoin_node_realtime_fill
+-- Name: bitcoin_node_historical_fill
+-- Name: bitcoin_extract_queue_script
+6) Upload the lambda development package for each lambda function with the same
+   name as the function.
+7) Create the following cloudwatch trigger on each lambda function to
+   run every minute for the realtime queue, and run every five minutes for
+   the other scripts
