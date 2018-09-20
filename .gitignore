@@ -5,3 +5,4 @@ ETL/dev/transform/xrp/csv/*
 ETL/dev/transform/btc/csv/*
 ETL/dev/transform/eth/csv/*
 ETL/dev/ipython
+Datamart/connection_details.txt
