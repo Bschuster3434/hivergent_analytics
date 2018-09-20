@@ -1,0 +1,34 @@
+The current blocksize for the Bitcoin Blockchain is currently set a 1MB. If
+you heard this information and were, say, right-sizing an environment to
+understand how much space you would need, setting that to 1MB would seem
+logical. And it is, except for one small detail:
+
+When we planned our infrastructure, we planned to see every tx for every
+block in every blockchain, which means we need to be storing a lot of data. We
+wanted to do this in S3 to keep the data persistent and available without the
+need of a server. When we assumed we'd be storing each block, we used the 1MB
+number, but the problem is that that 1MB is actually compresse data. If you
+were to look at a totally raw transaction, it would just look like a string of
+hex code. When Bitcoin says it has has 1 MB size, what it means is that it's
+1MB to that hex. If you want the uncompressed data (the human readable type),
+you'd need a lot more space.
+
+How much more space are we talking about? I just checked the latest block in the
+Bitcoin blockchain (which is a full block, mind you), and found that
+uncompressed, it was over 8MB in size. This means that our estimates for the
+Bitcoin blockchain going forward is actually going to have to be 8 times bigger
+for any uncompressed data.
+
+This is a minor setback, though, as it made me realize that there is a
+significant optimization I can make. Instead of storing the raw blockchain
+transaction, it will actually be feasible to transform directly from the
+blockchain. Getting to my node has been way easier than I anticipated. So much
+so that it's almost trivial to run and grab the data I need from the node
+and do the transform from the file I want. Then, all I have to do is store
+the transformed, ready to be used by my services metadata.
+
+If I can make that work, I can reduce the size of the data I store in S3. In
+addition, I can make it possible to be able to start collecting my metadata
+layer that includes the information required to make my system operate and run.
+
+So far, so good.

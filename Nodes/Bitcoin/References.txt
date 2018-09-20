@@ -36,6 +36,9 @@ Bitcoin Conf Options
 Bitcoin Developer Reference
 - https://bitcoin.org/en/developer-reference#addmultisigaddress
 
+Bitcoin CLI reference
+- https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list
+
 Great Tutorial on Dealing with Time
 - https://howchoo.com/g/ywi5m2vkodk/working-with-datetime-objects-and-timezones-in-python
 
